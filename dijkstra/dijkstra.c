@@ -163,12 +163,31 @@ int main(int argc, char *argv[])
         heep(heepArray, heepNumeracaoVetores, quantVertices);
     }
 
-    printf("Vertices / Dist / Prev");
+    // printf("Vertices / Dist / Prev");
+    // printf("\n");
+    // for (int i = 0; i < quantVertices; i++)
+    // {
+    //     printf("%i / %i / %i\n", i+1, dist[i], prev[i]);
+    // }
     printf("\n");
+    printf("Vertices:  ");
+    // printf("\n");
     for (int i = 0; i < quantVertices; i++)
     {
-        printf("%i / %i / %i\n", i+1, dist[i], prev[i]);
+        printf("  %i  |", i+1);
     }
+    printf("\n");
+    printf("Dist/Prev: ");
+    for (int i = 0; i < quantVertices; i++)
+    {
+        if(prev[i] == -1) {
+            printf(" %i/%i|", dist[i], prev[i]);
+        } else {
+            printf(" %i/%i |", dist[i], prev[i]);
+        }
+    }
+    printf("\n");
+    printf("\n");
 
     return 0;
 }

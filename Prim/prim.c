@@ -81,11 +81,9 @@ int pegarVisinhosDeV(int *visinhosDeV, int *pesoDeUparV, int *peso, int quantVer
             {
                 visinhosDeV[contadorAux] = vertces[0][j];
                 pesoDeUparV[contadorAux] = peso[j];
-                // printf("%i\n", vertces[0][j]);
                 contadorAux++;
             }
         }
-        // printf("\n");
     }
 }
 
@@ -167,23 +165,6 @@ int main(int argc, char *argv[])
     adiconarDistNaHeep(dist, heepArray, quantVertices);
     heep(heepArray, heepNumeracaoVetores, quantVertices); // Organiza os vertices
 
-
-    // for (int i = 0; i < quantVertices; i++)
-    // {
-    //     for (int j = 0; j < quantVertices; j++)
-    //     {
-    //         printf("%i/%i |", matrizDist[i][j], matrizPrev[i][j]);
-    //     }
-    //     printf("\n");
-    // }
-
-    // for (int i = 0; i < quantVertices; i++)
-    // {
-    //     printf("%i ", dist[i]);
-    // }
-    // printf("\n");
-    
-
     int visinhosDeV[10]; // Vizinhos do vertice V
     int pesoDeUparV[10]; // Vizinhos do vertice V
 
@@ -191,16 +172,25 @@ int main(int argc, char *argv[])
     int cont = 1;
     int contaMostrar = 0;
 
-    printf("\n---------------------\n");
-    printf("| 999 = Infinito     |\n");
-    printf("| custo/prev         |");
-    printf("\n---------------------\n\n\n");
-
+    // printf("\n---------------------\n");
+    printf("\n");
+    printf("999 = Infinito     \n");
+    // printf("| custo/prev         |");
+    // printf("\n---------------------\n\n");
+    
+    printf("\n");
+    printf("Vertices\n");
+    // printf("\n");
+    for (int i = 0; i < quantVertices; i++)
+    {
+        printf("-------");
+    }
+    printf("\n");
 
 
     for (int i = 0; i < quantVertices; i++)
     {
-        printf("%i     |", i+1);
+        printf("v= %i  |", i+1);
     }
 
     printf("\n");
@@ -212,36 +202,13 @@ int main(int argc, char *argv[])
     
 
     while (heepVazia(heepArray))
-    // while (cont < 7)
     {  
         int verticeMinimo = heepNumeracaoVetores[0];
 
         iniciliza(visinhosDeV,pesoDeUparV); // Inicializa com -1;
 
         pegarVisinhosDeV(visinhosDeV, pesoDeUparV, peso, quantVertices, vertces, verticeMinimo, z);
-        // printf("#%i\n", verticeMinimo);
-        // printf("Fora:");
-        // for (int i = 0; i < quantVertices; i++)
-        // {
-        //     printf("%i ", visinhosDeV[i]);
-        // }
-        // printf("\n");
-
-        // printf("Heep\n");
-        // for (int i = 0; i < quantVertices; i++)
-        // {
-        //     printf("%i ", heepNumeracaoVetores[i]);
-        // }
-        // printf("\n");
-        // for (int i = 0; i < quantVertices; i++)
-        // {
-        //     printf("%i ", heepArray[i]);
-        // }
-        // printf("\n");
-
-        // for (int i = 1; i < 3; i++)
-        // {
-
+        
         if(cont > 1) {
             for (int j = 0; j < quantVertices; j++)
             {
@@ -255,45 +222,19 @@ int main(int argc, char *argv[])
         {
             if(vizinhoMorreu(visinhosDeV[j], heepArray, heepNumeracaoVetores, quantVertices)) 
             {
-                // printf(" %i *%i\n ", visinhosDeV[j], pesoDeUparV[j]);
-                // printf("if %i > %i\n", matrizDist[cont-1][visinhosDeV[j] - 1], pesoDeUparV[j]);
-                // printf("i) %i\n", cont);
                 if(matrizDist[cont-1][visinhosDeV[j] - 1] > pesoDeUparV[j]) 
                 {
                     matrizDist[cont][visinhosDeV[j] - 1] = pesoDeUparV[j];
                     matrizPrev[cont][visinhosDeV[j] - 1] = verticeMinimo;
                     dist[visinhosDeV[j] - 1] = pesoDeUparV[j];
                     atualizarDistNaHeep(visinhosDeV[j] - 1, dist, heepArray, heepNumeracaoVetores, quantVertices);
-                }
-                // printf("%i >>>>>>", cont);
-                // for (int i = 0; i < quantVertices; i++)
-                // {
-                //     printf("%i ", matrizDist[cont][i]);
-                // }
-                // printf("\n");
-                // // printf("%i >>>>>>>>>>", cont);
-                // for (int i = 0; i < quantVertices; i++)
-                // {
-                //     printf("(%i) ", heepArray[i]);
-                // }
-                // printf("\n");
-                // for (int i = 0; i < quantVertices; i++)
-                // {
-                //     printf("(%i) ", heepNumeracaoVetores[i]);
-                // }
-                // printf("\n");
-                
+                }                               
             } 
-            // else 
-            // {
-            //     matrizDist[cont][visinhosDeV[j] - 1] = -999;
-            // }
-
         }
         
         for (int j = 0; j < quantVertices; j++)
         {
-            if(contaMostrar < 2) {
+            if(contaMostrar < 1) {
                 if(matrizDist[contaMostrar][j] == 999 ) {
                     printf("%i/%i|", matrizDist[contaMostrar][j], matrizPrev[contaMostrar][j]);
                 } 
@@ -326,66 +267,13 @@ int main(int argc, char *argv[])
             }
         }
         printf("\n");
-        // printf("");
 
         cont++;
         contaMostrar++;
         heepArray[0] = 1000; // Remove esse vertice da heep.
         heep(heepArray, heepNumeracaoVetores, quantVertices); // Reordeno a heep   
-        // }
-        
-
-        // printf("Dentro:");
-        // for (int i = 0; visinhosDeV[i] != -1 ; i++) // Andandoo Pelos visinhos de V
-        // {
-        //     if(vizinhoMorreu(visinhosDeV[i], heepArray, heepNumeracaoVetores, quantVertices)) {
-        //         // printf(" %i *%i ", visinhosDeV[i], pesoDeUparV[i]);
-        //         // if(dist[visinhosDeV[i] - 1] > pesoDeUparV[i]) {
-        //         //     dist[visinhosDeV[i] - 1] = pesoDeUparV[i];
-        //         //     prev[visinhosDeV[i] - 1] = verticeMinimo;
-        //         //     atualizarDistNaHeep(dist, heepArray, heepNumeracaoVetores, quantVertices);
-        //         //     heep(heepArray, heepNumeracaoVetores, quantVertices); // Reordeno a heep
-        //         // }
-        //         if(dist[visinhosDeV[i] - 1] > pesoDeUparV[i]) {
-        //             dist[visinhosDeV[i] - 1] = pesoDeUparV[i];
-        //             prev[visinhosDeV[i] - 1] = verticeMinimo;
-        //             atualizarDistNaHeep(dist, heepArray, heepNumeracaoVetores, quantVertices);
-        //             heep(heepArray, heepNumeracaoVetores, quantVertices); // Reordeno a heep
-        //         }
-
-        //     }
-            
-            
-
-        //     // if(dist[visinhosDeV[i] - 1] > dist[verticeMinimo - 1] + pesoDeUparV[i]) {
-        //     //     dist[visinhosDeV[i] - 1] = dist[verticeMinimo - 1] + pesoDeUparV[i];
-        //     //     prev[visinhosDeV[i] - 1] = verticeMinimo;
-        //     // }
-        // }        
-        // heep(heepArray, heepNumeracaoVetores, quantVertices);
-        
-        // printf("\n");
     }
 
-    // printf("Vertices / Dist / Prev");
-    // printf("\n");
-    // for (int i = 0; i < quantVertices; i++)
-    // {
-    //     printf("%i / %i / %i\n", i+1, dist[i], prev[i]);
-    // }
-    // for (int i = 0; i < quantVertices; i++)
-    // {
-    //     for (int j = 0; j < quantVertices; j++)
-    //     {
-    //         if(!vizinhoMorreu(j, heepArray, heepNumeracaoVetores, quantVertices)) {
-    //         //     printf("    ", matrizDist[i][j], matrizPrev[i][j]);
-    //         // } else {
-    //             printf("*%i/%i |", matrizDist[i][j], matrizPrev[i][j]);
-    //         }
-    //             printf("%i/%i |", matrizDist[i][j], matrizPrev[i][j]);
-    //     }
-    //     printf("\n");
-    // }
-
+    printf("\n");
     return 0;
 }
