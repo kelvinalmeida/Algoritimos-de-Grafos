@@ -182,7 +182,10 @@ int main(int argc, char *argv[])
     {
         if(prev[i] == -1) {
             printf(" %i/%i|", dist[i], prev[i]);
-        } else {
+        }else if(dist[i] > 9) {
+            printf("%i/%i |", dist[i], prev[i]);
+        } 
+        else {
             printf(" %i/%i |", dist[i], prev[i]);
         }
     }

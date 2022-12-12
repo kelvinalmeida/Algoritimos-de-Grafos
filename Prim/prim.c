@@ -179,7 +179,7 @@ int main(int argc, char *argv[])
     // printf("\n---------------------\n\n");
     
     printf("\n");
-    printf("Vertices\n");
+    printf("Vertices e seus Dist/Prev:\n");
     // printf("\n");
     for (int i = 0; i < quantVertices; i++)
     {
